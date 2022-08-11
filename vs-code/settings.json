@@ -1,9 +1,7 @@
 {
   "editor.renderWhitespace": "none", // removes whitespace chars
-  "editor.guides.indentation": false, // removes indent guides
+  "editor.guides.indentation": true, // removes indent guides
   "editor.renderLineHighlight": "none", // removes line highlight
-  "editor.overviewRulerBorder": false, // removes border from overview ruler (located on the right, same position as the scrollbar)
-  "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
   "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
   "editor.matchBrackets": "always", // the highlight of matching brackets
   "workbench.editor.showIcons": false, // removes icon from opened files in tabs
@@ -13,25 +11,26 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.wordWrap": "on",
-  "editor.fontFamily": "'Roboto Mono', monospace",
-  "editor.fontSize": 13.5,
-  "editor.lineHeight": 1.6,
+  "editor.fontFamily": "'JetBrains Mono', 'Roboto Mono', 'DM Mono', monospace",
+  "editor.fontSize": 12,
+  "editor.lineHeight": 1.75,
+  // "editor.fontFamily": "'Roboto Mono', 'DM Mono', monospace",
+  // "editor.fontSize": 12,
+  // "editor.lineHeight": 1.75,
   "editor.folding": true,
   "editor.glyphMargin": false,
+  "workbench.activityBar.visible": false,
 
   "explorer.openEditors.visible": 0, // removes the open editors section at the top of the sidebar, you can see the opened files with ⌘ + ⌥ + Tab
 
-  "indenticator.color.dark": "rgba(255,255,255,.1)", // adds a subtle indent guide (needs Indenticator extension)
-
-  "workbench.activityBar.visible": false,
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.wrapTabs": true,
   "workbench.sideBar.location": "left",
   "workbench.statusBar.visible": false,
-  "workbench.editor.enablePreview": true,
+  "workbench.editor.enablePreview": false,
 
-  "terminal.integrated.fontFamily": "Menlo for Powerline",
-  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "'Roboto Mono', monospace",
+  "terminal.integrated.fontSize": 13,
   "terminal.integrated.lineHeight": 1.3,
 
   "breadcrumbs.enabled": false,
@@ -39,12 +38,6 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-
-  // Prettier
-  "prettier.semi": false,
-  "prettier.jsxSingleQuote": false,
-  "prettier.singleQuote": false,
-  "prettier.printWidth": 80,
 
   "[python]": {
     "editor.defaultFormatter": null,
@@ -56,7 +49,13 @@
   },
 
   "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
+    // "editor.defaultFormatter": "svelte.svelte-vscode"
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null
+  },
+
+  "[blade]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "php.validate.executablePath": "/opt/lampp/bin/php",
@@ -64,11 +63,21 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.cursorBlinking": "solid",
   "editor.cursorStyle": "block",
+  "editor.insertSpaces": true,
   "go.toolsManagement.autoUpdate": true,
   "workbench.startupEditor": "none",
-  "redhat.telemetry.enabled": false,
-  "workbench.colorTheme": "One Dark Pro Darker",
-  "liveServer.settings.donotShowInfoMsg": true,
   "prettier.requireConfig": true,
-  "svelte.enable-ts-plugin": true
+  "svelte.enable-ts-plugin": true,
+  "window.titleBarStyle": "custom",
+  "window.title": "${rootName}",
+  "workbench.editorAssociations": {
+    "*.db": "sqlite-viewer.option"
+  },
+  "editor.cursorSmoothCaretAnimation": true,
+  "files.associations": {
+    "*.tmpl": "html"
+  },
+  "workbench.colorTheme": "Min Dark",
+  "workbench.iconTheme": "vs-minimal",
+  "terminal.integrated.enableMultiLinePasteWarning": false
 }
