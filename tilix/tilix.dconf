@@ -6,7 +6,6 @@ prompt-on-close=false
 prompt-on-delete-profile=true
 quake-height-percent=40
 quake-specific-monitor=0
-recent-session-files=['/home/quikzens/FILES/tilix-sessions/laravel-tutorial.json', '/home/quikzens/FILES/tilix-sessions/dummy-session.json', '/home/quikzens/trysessions.json']
 session-name='${directory}'
 sidebar-on-right=false
 terminal-title-show-when-single=true
