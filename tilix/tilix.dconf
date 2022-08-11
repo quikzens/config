@@ -1,0 +1,38 @@
+[/]
+app-title='${sessionName}'
+close-with-last-session=false
+copy-on-select=true
+prompt-on-close=false
+prompt-on-delete-profile=true
+quake-height-percent=40
+quake-specific-monitor=0
+recent-session-files=['/home/quikzens/FILES/tilix-sessions/laravel-tutorial.json', '/home/quikzens/FILES/tilix-sessions/dummy-session.json', '/home/quikzens/trysessions.json']
+session-name='${directory}'
+sidebar-on-right=false
+terminal-title-show-when-single=true
+terminal-title-style='normal'
+theme-variant='dark'
+window-save-state=true
+window-state=43908
+window-style='normal'
+
+[profiles]
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d']
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+background-color='#2E2E34343636'
+badge-color-set=false
+bold-color-set=false
+cell-height-scale=1.2
+cursor-blink-mode='on'
+cursor-colors-set=false
+font='JetBrains Mono 9.2998046875'
+foreground-color='#A1B0B8'
+highlight-colors-set=false
+login-shell=false
+palette=['#252525', '#FF5252', '#C3D82C', '#FFC135', '#42A5F5', '#D81B60', '#00ACC1', '#F5F5F5', '#708284', '#FF5252', '#C3D82C', '#FFC135', '#42A5F5', '#D81B60', '#00ACC1', '#F5F5F5']
+terminal-title='${id}'
+use-custom-command=false
+use-system-font=false
+use-theme-colors=false
+visible-name='Default'

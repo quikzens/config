@@ -17,3 +17,5 @@ fi
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias vim="nvim"
+alias cat='batcat --paging=never'
+alias nvimconfig='vim ~/.config/nvim/init.lua'
