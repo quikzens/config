@@ -4,8 +4,13 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="quikzens"
 
 # Plugins
-plugins=(git)
-plugins=(z zsh-autosuggestions)
+plugins=(
+	git
+	z zsh-autosuggestions
+	jsontools
+	copyfile
+	golang
+)
 
 source $ZSH/oh-my-zsh.sh
 
