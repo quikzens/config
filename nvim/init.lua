@@ -17,6 +17,7 @@ vim.opt.splitright = true
 
 -- Global {{
 vim.g.mapleader = ','
+vim.g.go_doc_popup_window = 1
 -- }}
 
 
@@ -108,6 +109,15 @@ require('packer').startup(function(use)
 		requires = {'kyazdani42/nvim-web-devicons'}
 	}
 
+	use 'neovim/nvim-lspconfig'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/nvim-cmp'
+	-- because i use ultisnips
+	use 'quangnguyen30192/cmp-nvim-ultisnips'
+
   if install_plugins then
     require('packer').sync()
   end
@@ -133,7 +143,9 @@ vim.g.netrw_winsize = 15
 vim.g.netrw_liststyle = 3 
 
 -- 'kyazdani42/nvim-tree.lua'
-require("nvim-tree").setup()
+require("nvim-tree").setup {
+	filters = { custom = { "^.git$" } }
+}
 
 -- 'romgrk/barbar.nvim'
 require'bufferline'.setup {
@@ -263,5 +275,65 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
--- }}
 
+-- nvim-cmp
+local cmp = require'cmp'
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+		end,
+	},
+	window = {
+		-- completion = cmp.config.window.bordered(),
+		-- documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
+		['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.abort(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+	}),
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' },
+		{ name = 'ultisnips' }, -- For ultisnips users.
+		{ name = 'buffer' },
+	})
+})
+
+-- Set configuration for specific filetype.
+-- cmp.setup.filetype('gitcommit', {
+-- 	sources = cmp.config.sources({
+-- 		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+-- 	}, {
+-- 		{ name = 'buffer' },
+-- 	})
+-- })
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
+	})
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- ensure 'gopls' binary is installed and accessible by PATH
+require('lspconfig')['gopls'].setup {
+	capabilities = capabilities
+}
+-- }}
