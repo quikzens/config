@@ -12,6 +12,7 @@ vim.opt.termguicolors = true
 vim.opt.encoding = "utf-8"
 vim.opt.swapfile = false
 vim.opt.splitright = true
+vim.opt.path = vim.fn.getcwd().."/**"
 -- }}
 
 
@@ -48,15 +49,7 @@ key_mapper('n', '<leader>e', ':NvimTreeToggle<cr>') -- toggle nvim-tree file exp
 
 key_mapper('n', '<leader>t', ':BufferPick<cr>')
 
--- swap paste command for more convenient use 
--- initially 'p' paste text at the front of the cursor, i want it the other way around
-key_mapper('n', 'p', 'P')
-key_mapper('n', 'P', 'p')
-
 key_mapper('v', 'y', '"+y') -- automatically yank/copy selected text to clipboard
-
-key_mapper('n', 'gg', 'gg0')
-key_mapper('n', 'G', 'G$')
 
 -- for easier buffers navigation
 key_mapper('n', '[b', ':bprevious<cr>')
@@ -66,6 +59,8 @@ key_mapper('n', ']B', ':blast<cr>')
 
 key_mapper('', '<leader>h', ':wincmd h<cr>')
 key_mapper('', '<leader>l', ':wincmd l<cr>')
+
+key_mapper('n', '\\', ',')
 -- }}
 
 
@@ -108,7 +103,10 @@ require('packer').startup(function(use)
 		'romgrk/barbar.nvim',
 		requires = {'kyazdani42/nvim-web-devicons'}
 	}
+	use 'tpope/vim-surround'
+	use 'tpope/vim-repeat'
 
+	-- Development Code Completion and LSP Config
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
@@ -337,3 +335,4 @@ require('lspconfig')['gopls'].setup {
 	capabilities = capabilities
 }
 -- }}
+
