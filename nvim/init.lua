@@ -13,6 +13,8 @@ vim.opt.encoding = "utf-8"
 vim.opt.swapfile = false
 vim.opt.splitright = true
 vim.opt.path = vim.fn.getcwd().."/**"
+vim.opt.mouse = "a"
+vim.opt.updatetime = 100
 -- }}
 
 
