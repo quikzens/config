@@ -106,9 +106,13 @@ require('packer').startup(function(use)
 		requires = {'kyazdani42/nvim-web-devicons'}
 	}
 	use 'tpope/vim-surround'
-	use 'tpope/vim-repeat'
+	use 'tpope/vim-commentary'
+	use 'gosukiwi/vim-smartpairs'
 
-	-- Development Code Completion and LSP Config
+	-- Git 
+	use 'airblade/vim-gitgutter'
+
+	-- Code Completion and LSP Config
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
@@ -159,7 +163,7 @@ require'bufferline'.setup {
   tabpages = true,
 
   -- Enable/disable close button
-  closable = false,
+  closable = true,
 
   -- Enables/disable clickable tabs
   --  - left-click: go to buffer
@@ -259,9 +263,17 @@ require('lualine').setup {
     lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
     lualine_x = {},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_y = {},
+    lualine_z = {}
   },
+	-- sections = {
+  --   lualine_a = {'mode'},
+  --   lualine_b = {'branch', 'diff', 'diagnostics'},
+  --   lualine_c = {'filename'},
+  --   lualine_x = {},
+  --   lualine_y = {'progress'},
+  --   lualine_z = {'location'}
+  -- },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
@@ -336,5 +348,13 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 require('lspconfig')['gopls'].setup {
 	capabilities = capabilities
 }
+-- }}
+
+
+-- Vim Cmd {{
+vim.cmd([[
+highlight EndOfBuffer guifg=bg
+autocmd FileType go nnoremap <buffer> <S-j> :GoDef<CR>
+]])
 -- }}
 
