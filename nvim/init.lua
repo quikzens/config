@@ -1,3 +1,16 @@
+-- Prerequisites {{
+--
+-- 1. Go and gopls binary and ensure it's accessible by PATH 
+-- 2. Nerd Fonts ("JetBrains Nerd Fonts" is recommended)
+-- 3. python neovim library (`pip install neovim`)
+-- 4. Git and ensure it's accessible by PATH
+--
+-- Recommended:
+-- 5. Tilix as terminal emulator
+--
+-- }}
+
+
 -- Options {{
 vim.opt.compatible = false
 vim.opt.number = true
@@ -110,6 +123,7 @@ require('packer').startup(function(use)
 	use 'gosukiwi/vim-smartpairs'
 
 	-- Git 
+	use 'tpope/vim-fugitive'
 	use 'airblade/vim-gitgutter'
 
 	-- Code Completion and LSP Config
@@ -148,6 +162,7 @@ vim.g.netrw_liststyle = 3
 
 -- 'kyazdani42/nvim-tree.lua'
 require("nvim-tree").setup {
+	-- ignore directory
 	filters = { custom = { "^.git$" } }
 }
 
@@ -266,14 +281,6 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
-	-- sections = {
-  --   lualine_a = {'mode'},
-  --   lualine_b = {'branch', 'diff', 'diagnostics'},
-  --   lualine_c = {'filename'},
-  --   lualine_x = {},
-  --   lualine_y = {'progress'},
-  --   lualine_z = {'location'}
-  -- },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
@@ -344,7 +351,7 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- ensure 'gopls' binary is installed and accessible by PATH
+
 require('lspconfig')['gopls'].setup {
 	capabilities = capabilities
 }
