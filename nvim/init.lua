@@ -4,9 +4,11 @@
 -- 2. Nerd Fonts ("JetBrains Nerd Fonts" is recommended)
 -- 3. python neovim library (`pip install neovim`)
 -- 4. Git and ensure it's accessible by PATH
+-- 5. Node and npm/yarn
+-- 6. Prettier (`npm install --save-dev --save-exact prettier`)
 --
 -- Recommended:
--- 5. Tilix as terminal emulator
+-- 1. Tilix as terminal emulator
 --
 -- }}
 
@@ -28,12 +30,17 @@ vim.opt.splitright = true
 vim.opt.path = vim.fn.getcwd().."/**"
 vim.opt.mouse = "a"
 vim.opt.updatetime = 100
+vim.opt.timeoutlen = 500
 -- }}
 
 
 -- Global {{
 vim.g.mapleader = ','
 vim.g.go_doc_popup_window = 1
+vim.g.user_emmet_leader_key = 'zz'
+
+vim.g["prettier#autoformat"] = 1
+vim.g["prettier#autoformat_require_pragma"] = 0
 -- }}
 
 
@@ -72,7 +79,7 @@ key_mapper('n', ']b', ':bnext<cr>')
 key_mapper('n', '[B', ':bfirst<cr>')
 key_mapper('n', ']B', ':blast<cr>')
 
-key_mapper('', '<leader>h', ':wincmd h<cr>')
+key_mapper('', '<leader>k', ':wincmd h<cr>')
 key_mapper('', '<leader>l', ':wincmd l<cr>')
 
 key_mapper('n', '\\', ',')
@@ -106,6 +113,9 @@ require('packer').startup(function(use)
 	-- Go
 	use { "fatih/vim-go", run = ':GoUpdateBinaries' }
 
+	-- HTML 
+	use 'mattn/emmet-vim'
+
 	-- Development
 	use "SirVer/ultisnips"
 	use {
@@ -121,6 +131,13 @@ require('packer').startup(function(use)
 	use 'tpope/vim-surround'
 	use 'tpope/vim-commentary'
 	use 'gosukiwi/vim-smartpairs'
+
+	-- Prettier
+	use {
+	 'prettier/vim-prettier',
+		run = 'npm install',
+		ft = {'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'} 
+	}
 
 	-- Git 
 	use 'tpope/vim-fugitive'
@@ -234,24 +251,26 @@ require'bufferline'.setup {
   no_name_title = nil,
 }
 
-local nvim_tree_events = require('nvim-tree.events')
-local bufferline_state = require('bufferline.state')
+-- Bufferline Offset {{
+-- local nvim_tree_events = require('nvim-tree.events')
+-- local bufferline_state = require('bufferline.state')
 
-local function get_tree_size()
-  return require'nvim-tree.view'.View.width
-end
+-- local function get_tree_size()
+--   return require'nvim-tree.view'.View.width
+-- end
 
-nvim_tree_events.subscribe('TreeOpen', function()
-  bufferline_state.set_offset(get_tree_size())
-end)
+-- nvim_tree_events.subscribe('TreeOpen', function()
+--   bufferline_state.set_offset(get_tree_size())
+-- end)
 
-nvim_tree_events.subscribe('Resize', function()
-  bufferline_state.set_offset(get_tree_size())
-end)
+-- nvim_tree_events.subscribe('Resize', function()
+--   bufferline_state.set_offset(get_tree_size())
+-- end)
 
-nvim_tree_events.subscribe('TreeClose', function()
-  bufferline_state.set_offset(0)
-end)
+-- nvim_tree_events.subscribe('TreeClose', function()
+--   bufferline_state.set_offset(0)
+-- end)
+-- }}
 
 -- 'nvim-lualine/lualine.nvim'
 require('lualine').setup {
@@ -362,6 +381,7 @@ require('lspconfig')['gopls'].setup {
 vim.cmd([[
 highlight EndOfBuffer guifg=bg
 autocmd FileType go nnoremap <buffer> <S-j> :GoDef<CR>
+autocmd BufNewFile,BufRead *.jet set syntax=html
 ]])
 -- }}
 
